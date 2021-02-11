@@ -1,5 +1,6 @@
 import crypto from "crypto"
 import { Block, Trade } from "config/Types"
+
 const chain: Block[] = []
 
 const getTime = () => Math.floor(Date.now() / 1000)
@@ -39,6 +40,15 @@ const chainIsValid = (idx: number = chain.length): boolean => {
         return false
     }
     return chainIsValid(idx - 1)
+}
+
+const getBlocks = () => chain
+
+const getBlock = (id: number) => {
+    if (0 <= id && id <= chain.length) {
+        return chain[id]
+    }
+    return false
 }
 
 export { addBlock, chainIsValid }
