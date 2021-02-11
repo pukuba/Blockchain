@@ -6,7 +6,6 @@ import { readFileSync } from "fs"
 import { createServer } from "http"
 import queryComplexity, { simpleEstimator } from 'graphql-query-complexity'
 import depthLimit from "graphql-depth-limit"
-import DB from "config/connectDB"
 
 import express from "express"
 import expressPlayground from "graphql-playground-middleware-express"
@@ -22,13 +21,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get("/graphql", expressPlayground({ endpoint: "/api" }))
 
 const start = async () => {
-    const db = await DB.get()
     const server = new ApolloServer({
         typeDefs,
         resolvers,
-        context: () => {
-            return { db }
-        },
         validationRules: [
             depthLimit(5),
             queryComplexity({

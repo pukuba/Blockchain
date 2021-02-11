@@ -1,3 +1,24 @@
-type Query{
+type Query {
     test: String!
+    getBlock(id: Int): Block
+    getBlocks: [Block]
+    chainIsValid: Boolean
+}
+
+type Mutation {
+    addBlock(sender: String, reciver: String, amount: Int): Block
+}
+
+type Trade {
+    sender: String!
+    reciver: String!
+    amount: Int
+}
+
+type Block {
+    index: Int!
+    timestamp: Int!
+    data: Trade!
+    hash: String!
+    prevHash: String!
 }

@@ -25,11 +25,12 @@ const createBlock = (index: number, data: Trade, prevHash: string) => {
 const addBlock = (data: Trade) => {
     const index = chain.length
     const prevHash = index !== 0 ? chain[index - 1].hash : "0"
-    return chain.push(createBlock(index, data, prevHash))
+    chain.push(createBlock(index, data, prevHash))
+    return chain[index]
 }
 
 const chainIsValid = (idx: number = chain.length): boolean => {
-    if (idx === -1) {
+    if (idx === -1 || chain.length === 0) {
         return true
     }
     const hash = getHash(chain[idx].index, chain[idx].data, chain[idx].prevHash, chain[idx].timestamp)
@@ -44,6 +45,8 @@ const chainIsValid = (idx: number = chain.length): boolean => {
 
 const getBlocks = () => chain
 
+const getChainLength = () => chain.length
+
 const getBlock = (id: number) => {
     if (0 <= id && id <= chain.length) {
         return chain[id]
@@ -51,4 +54,4 @@ const getBlock = (id: number) => {
     return false
 }
 
-export { addBlock, chainIsValid }
+export { addBlock, chainIsValid, getBlock, getBlocks, getChainLength }
