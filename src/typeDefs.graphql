@@ -16,7 +16,7 @@ type Trade {
 }
 
 type Block {
-    index: Int!
+    id: Int!
     timestamp: Int!
     data: Trade!
     hash: String!

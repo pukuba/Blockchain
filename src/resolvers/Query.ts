@@ -5,8 +5,14 @@ export default {
     test: () => "Server On",
     getBlock: (parent: void, { id }: { id: number }) => {
         const block = getBlock(id)
-        if (block === false) {
-            throw new ApolloError(`id : [0 ~ ${getChainLength()}] ${id} is not valid `)
+        if (block === undefined) {
+            const chainLength = getChainLength()
+            if (chainLength === 0) {
+                throw new ApolloError(`chain is empty`)
+            }
+            else {
+                throw new ApolloError(`id : [1 ~ ${chainLength}] / ${id} is not valid `)
+            }
         }
         return block
     },
