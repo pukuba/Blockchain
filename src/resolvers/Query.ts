@@ -2,7 +2,6 @@ import { getBlock, getBlocks, chainIsValid, getChainLength } from "resolvers/blo
 import { ApolloError } from "apollo-server-express"
 
 export default {
-    test: () => "Server On",
     getBlock: (parent: void, { id }: { id: number }) => {
         const block = getBlock(id)
         if (block === undefined) {

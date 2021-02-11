@@ -1,5 +1,4 @@
 type Query {
-    test: String!
     getBlock(id: Int): Block
     getBlocks: [Block]
     chainIsValid: Boolean
