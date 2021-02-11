@@ -1,16 +1,16 @@
 import crypto from "crypto"
-
-const chain: any = []
+import { Block, Trade } from "config/Types"
+const chain: Block[] = []
 
 const getTime = () => Math.floor(Date.now() / 1000)
 
-const getHash = (index: number, data: any, prevHash: string, timestamp: number) => crypto
+const getHash = (index: number, data: Trade, prevHash: string, timestamp: number) => crypto
     .createHmac("sha256", "secret")
     .update(JSON.stringify(data) + prevHash + index + timestamp)
     .digest("hex")
 
 
-const createBlock = (index: number, data: any, prevHash: string) => {
+const createBlock = (index: number, data: Trade, prevHash: string) => {
     const timestamp = getTime()
     return {
         index,
@@ -21,9 +21,9 @@ const createBlock = (index: number, data: any, prevHash: string) => {
     }
 }
 
-const addBlock = (data: any) => {
+const addBlock = (data: Trade) => {
     const index = chain.length
-    const prevHash = index !== 0 ? chain[index - 1].hash : 0
+    const prevHash = index !== 0 ? chain[index - 1].hash : "0"
     return chain.push(createBlock(index, data, prevHash))
 }
 
