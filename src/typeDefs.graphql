@@ -2,6 +2,7 @@ type Query {
     getBlock(id: Int): Block
     getBlocks: [Block]
     chainIsValid: Boolean
+    getChainLength: Int
 }
 
 type Mutation {

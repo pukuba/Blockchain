@@ -15,6 +15,7 @@ export default {
         }
         return block
     },
-    getBlocks: () => getBlocks(),
-    chainIsValid: () => chainIsValid()
+    getBlocks,
+    chainIsValid,
+    getChainLength
 }
